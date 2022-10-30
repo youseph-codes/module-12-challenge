@@ -35,9 +35,14 @@ function viewRoles() {
     .then((roles) => {
         console.table(roles[0]);
         menuQuestions();
-    })
+    });
 }
 
 function viewEmployees() {
     db.promise()
+    .query('SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, departments.department_name FROM employees LEFT JOIN roles on roles.id=employees.roles_id LEFT JOIN departments.id=roles.department_id;')
+    .then((employees) => {
+        console.table(employees[0]);
+        menuQuestions();
+    });
 }
