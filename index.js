@@ -31,6 +31,11 @@ function viewDepartments() {
 
 function viewRoles() {
     db.promise()
+    .query('SELECT roles.id, roles.title, roles.salary, departments.department_name as department FROM roles LEFT JOIN departments on roles.department_id=departments.id;')
+    .then((roles) => {
+        console.table(roles[0]);
+        menuQuestions();
+    })
 }
 
 function viewEmployees() {
