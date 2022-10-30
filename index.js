@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./connection/connection')
-const apiRoutes = require('')
+const apiRoutes = require('');
+const { default: inquirer } = require('inquirer');
 
 const menuQuestions = [
     {
@@ -45,4 +46,23 @@ function viewEmployees() {
         console.table(employees[0]);
         menuQuestions();
     });
+}
+
+// adding functions of departments, roles, and employees
+
+function addDepartment() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newDepartment',
+            message: 'Department name?',
+        }
+    ]).then(answer => {
+        db.query('INSERT INTO departments SET?', { department_name: answer.newDepartment }, (err, res) => {
+            menuQuestions();
+        });
+    });
+}
+
+function addRole () {
 }
