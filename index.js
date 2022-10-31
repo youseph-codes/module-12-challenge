@@ -102,3 +102,29 @@ function addRole () {
         menuQuestions();
     });
 }
+
+async function addEmployee() {
+    const manager = await selectManager();
+    inquirer.prompt([
+        {
+            type: '',
+            name: '',
+            message: ''
+        },
+        {
+            type: '',
+            name: '',
+            message: ''
+        },
+        {
+            type: '',
+            name: '',
+            message: ''
+        },
+        {
+            type: '',
+            name: '',
+            message: ''
+        },
+    ])
+}
