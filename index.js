@@ -104,27 +104,42 @@ function addRole () {
 }
 
 async function addEmployee() {
-    const manager = await selectManager();
+    const managers = await selectManager();
     inquirer.prompt([
         {
-            type: '',
-            name: '',
-            message: ''
+            type: 'input',
+            name: 'first name',
+            message: 'What is the first name of the employee being added?'
         },
         {
-            type: '',
-            name: '',
-            message: ''
+            type: 'input',
+            name: 'last name',
+            message: 'What is the last name of the employee being added?'
         },
         {
-            type: '',
-            name: '',
-            message: ''
+            type: 'input',
+            name: 'role',
+            message: 'What is their role?'
         },
         {
-            type: '',
-            name: '',
-            message: ''
+            type: 'input',
+            name: 'manager',
+            message: 'Who is their manager?'
+        }
+    ]).then(function (res) {
+        let roleID = res.role
+        let managerID = res.manager
+
+        db.query('INSERT INTO employees SET ?',
+        {
+            firstName: ,
+            lastName: ,
+            managerID: ,
+            roleID: ,
         },
-    ])
+        function (err) {
+            menuQuestions();
+        }
+        )
+    })
 }
