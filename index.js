@@ -132,14 +132,42 @@ async function addEmployee() {
 
         db.query('INSERT INTO employees SET ?',
         {
-            firstName: ,
-            lastName: ,
-            managerID: ,
-            roleID: ,
+            firstName: res.firstName,
+            lastName: res.lastName,
+            managerID: res.managerID,
+            roleID: res.roleID,
         },
         function (err) {
             menuQuestions();
-        }
-        )
+        })
+    })
+}
+
+async function updateEmployees() {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'select',
+            choices: await selectEmployee(),
+            message: 'Who would you like to update?'
+        },
+        {
+            type: 'list',
+            name: 'assign',
+            choices: await selectRole(),
+            message: 'What role is being assigned to this employee?'
+        },
+    ]).then(function (res) {
+        let employeeName = res.select
+        let employeeRole = res.assign
+
+        db.query('INSERT INTO employee SET ?',
+        {
+            ID: employeeName,
+            rolesID: employeeRole,
+        },
+        function (err) {
+            menuQuestions();
+        })
     })
 }
