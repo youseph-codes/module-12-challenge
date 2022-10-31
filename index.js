@@ -65,4 +65,40 @@ function addDepartment() {
 }
 
 function addRole () {
+    db.promise().query('SELECT * FROM departments')
+    .then((res) => {
+        return res[0].map(departments => {
+            return {
+                name: departments.departments_name,
+                value: departments.id
+            }
+        })
+    })
+    .then((departments) => {
+        return inquirer.prompt([
+            {
+                type: 'input',
+                name: 'role',
+                message: 'What role would you like to add?'
+            },
+            {
+                type: 'input',
+                name: 'role',
+                message: 'What is the salary for this role?'
+            },
+            {
+                type: 'list',
+                name: 'department',
+                choices: departments,
+                messages: 'What department is this role in?'
+            }
+        ])
+    })
+    .then(answer => {
+        return db.promise().query('INSERT INTO roles SET ?', { title: answer.role, salary: answer.salary, department_id: answers.department });
+    })
+    .then(res => {
+        console.log('A new role has been added')
+        menuQuestions();
+    });
 }
