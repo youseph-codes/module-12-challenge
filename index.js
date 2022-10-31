@@ -1,7 +1,13 @@
-const express = require('express');
-const db = require('./connection/connection')
-const apiRoutes = require('');
-const { default: inquirer } = require('inquirer');
+// const express = require('express');
+// const db = require('./connection/connection')
+// const apiRoutes = require('');
+// const { default: inquirer } = require('inquirer');
+
+const mysql = require("mysql2");
+const inquirer = require("inquirer");
+// const consoleTbl = require("console.table");
+
+
 
 const menuQuestions = [
     {
