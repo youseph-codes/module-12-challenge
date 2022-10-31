@@ -117,13 +117,15 @@ async function addEmployee() {
             message: 'What is the last name of the employee being added?'
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'role',
+            choices: await selectRole(),
             message: 'What is their role?'
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'manager',
+            choices: managers,
             message: 'Who is their manager?'
         }
     ]).then(function (res) {
