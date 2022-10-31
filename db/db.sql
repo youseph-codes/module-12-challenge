@@ -1,1 +1,4 @@
-CREATE DATABASE emp
+
+
+CREATE DATABASE emptracker;
+USE employeetracker;
