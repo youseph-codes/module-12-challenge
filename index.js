@@ -187,8 +187,19 @@ function menuQuestion() {
             case "View all departments":
                 viewDepartments();
                 break;
+            case "View all roles":
+                viewRoles();
+                break;
+            case "View all employees":
+                viewEmployees();
+                break;
+
+            default:
+            break;
         }
     });
 }
+
+
 
 menuQuestion();
