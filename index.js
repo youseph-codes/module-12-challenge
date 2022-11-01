@@ -32,7 +32,7 @@ function viewDepartments() {
     .query('SELECT departments.id, departments.department_name FROM departments;')
     .then((departments) => {
         console.table(departments[0]);
-        menuQuestions();
+        menuQuestion();
     });
 }
 
@@ -41,7 +41,7 @@ function viewRoles() {
     .query('SELECT roles.id, roles.title, roles.salary, departments.department_name as department FROM roles LEFT JOIN departments on roles.department_id=departments.id;')
     .then((roles) => {
         console.table(roles[0]);
-        menuQuestions();
+        menuQuestion();
     });
 }
 
@@ -50,7 +50,7 @@ function viewEmployees() {
     .query('SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, departments.department_name FROM employees LEFT JOIN roles on roles.id=employees.roles_id LEFT JOIN departments.id=roles.department_id;')
     .then((employees) => {
         console.table(employees[0]);
-        menuQuestions();
+        menuQuestion();
     });
 }
 
@@ -65,7 +65,7 @@ function addDepartment() {
         }
     ]).then(answer => {
         db.query('INSERT INTO departments SET?', { department_name: answer.newDepartment }, (err, res) => {
-            menuQuestions();
+            menuQuestion();
         });
     });
 }
@@ -105,7 +105,7 @@ function addRole () {
     })
     .then(res => {
         console.log('A new role has been added')
-        menuQuestions();
+        menuQuestion();
     });
 }
 
@@ -146,7 +146,7 @@ async function addEmployee() {
             roleID: res.roleID,
         },
         function (err) {
-            menuQuestions();
+            menuQuestion();
         })
     })
 }
@@ -175,7 +175,20 @@ async function updateEmployees() {
             rolesID: employeeRole,
         },
         function (err) {
-            menuQuestions();
+            menuQuestion();
         })
     })
 }
+
+function menuQuestion() {
+    inquirer.prompt(menuQuestions).then((answers) => {
+        console.log(answers.answer);
+        switch (answers.answer) {
+            case "View all departments":
+                viewDepartments();
+                break;
+        }
+    });
+}
+
+menuQuestion();
