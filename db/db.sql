@@ -1,4 +1,4 @@
+DROP DATABASE IF EXIST employeetracker
 
-
-CREATE DATABASE emptracker;
+CREATE DATABASE employeetracker;
 USE employeetracker;
