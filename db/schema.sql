@@ -18,3 +18,10 @@ CREATE TABLE employees (
     FOREIGN KEY (managerID) REFERENCES employees(id) ON DELETE SET NULL
 );
 
+CREATE TABLE roles (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(30) NOT NULL,
+    salary DECIMAL NOT NULL,
+    department_id INTEGER,
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE
+);
