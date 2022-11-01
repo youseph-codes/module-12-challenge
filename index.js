@@ -1,5 +1,5 @@
 // const express = require('express');
-// const db = require('./connection/connection')
+const db = require('./connection/connection')
 // const apiRoutes = require('');
 // const { default: inquirer } = require('inquirer');
 
