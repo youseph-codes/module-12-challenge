@@ -89,7 +89,7 @@ function addRole () {
             },
             {
                 type: 'input',
-                name: 'role',
+                name: 'salary',
                 message: 'What is the salary for this role?'
             },
             {
@@ -176,6 +176,30 @@ async function updateEmployees() {
         },
         function (err) {
             menuQuestion();
+        })
+    })
+}
+
+function selectManager() {
+    return db.promise().query('SELECT * FROM employees')
+    .then(res => {
+        return res[0].map(employees => {
+            return {
+                name: `${employees.firstName} ${employees.lastName}`,
+                value: employees.rolesID,
+            };
+        })
+    })
+}
+
+function selectRole() {
+    return db.promise().query('SELECT * FROM roles')
+    .then(res => {
+        return res[0].map(role => {
+            return {
+                name: role.title,
+                value: role.id,
+            };
         })
     })
 }
