@@ -47,7 +47,7 @@ function viewRoles() {
 
 function viewEmployees() {
     db.promise()
-    .query('SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, departments.department_name FROM employees LEFT JOIN roles on roles.id=employees.roles_id LEFT JOIN departments.id=roles.department_id;')
+    .query('SELECT employees.id, employees.firstName, employees.lastName, roles.title, roles.salary, departments.department_name FROM employees LEFT JOIN roles on roles.id=employees.rolesID LEFT JOIN departments on departments.id=roles.department_id;')
     .then((employees) => {
         console.table(employees[0]);
         menuQuestion();
