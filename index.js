@@ -5,9 +5,8 @@ const db = require('./connection/connection')
 
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
+// const Connection = require('mysql2/typings/mysql/lib/Connection');
 // const consoleTbl = require("console.table");
-
-
 
 const menuQuestions = [
     {
@@ -55,7 +54,6 @@ function viewEmployees() {
 }
 
 // adding functions of departments, roles, and employees
-
 function addDepartment() {
     inquirer.prompt([
         {
@@ -109,8 +107,6 @@ function addRole () {
     });
 }
 
-
-
 async function addEmployee() {
     const managers = await selectManager();
     inquirer.prompt([
@@ -140,15 +136,10 @@ async function addEmployee() {
         let roleID = res.role
         let managerID = res.manager
 
-        db.query('INSERT INTO employees SET ?',
-        {
-            firstName: res.firstName,
-            lastName: res.lastName,
-            managerID: res.managerID,
-            roleID: res.roleID,
-        },
-        function (err) {
-            menuQuestion();
+        db.query('INSERT INTO employees SET ?', {firstName: res.firstName, lastName: res.lastName, roleID: res.roleID, managerID: res.managerID}, function(err, res) {
+            if(err) throw err;
+            console.log('An employee was added!');
+            start();
         })
     })
 }
@@ -225,7 +216,5 @@ function menuQuestion() {
         }
     });
 }
-
-
 
 menuQuestion();
